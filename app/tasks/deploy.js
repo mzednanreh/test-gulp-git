@@ -54,9 +54,9 @@ const updateStagingLog = (stagingLink) => {
 
 
 const commitStaginLog = () => {
-  const stagingLogFile = ['./staging-link.log'];
+  const stagingLogFile = './staging-link.log';
 
-  console.log('after deploy now commit log file');
+  console.log('after deploy now commit log file 2');
 
   return gulpSrc(stagingLogFile)
     .pipe(git.add())
