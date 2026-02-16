@@ -21,6 +21,7 @@ const replace = require('gulp-replace');
 const { pullFragments, removeFragmentsToken, removeFragments } = require('../helpers/fragments');
 const fixDoctype = require('../helpers/fix-doctype');
 const gulpif = require('gulp-if');
+const flatmap = require('gulp-flatmap');
 
 
 exports.build = (project) =>
@@ -142,14 +143,32 @@ exports.build = (project) =>
   // and update image paths
   const zips = () =>
   {
+    let streamZIPs = merge();
+
+    projectStream = zipHelper([`${buildDest}\*\*`, `!${buildDest}/index.html`], buildDest, stamp);
+
+    eachEmailStream = gulpSrc([
+      `${buildDest}\*`,
+      `!${buildDest}/index.html`
+    ])
+      .pipe(flatmap(function (stream, file){
+        var fileName = file.basename;
+
+        return zipHelper([`${buildDest+fileName}/**/*`], buildDest, fileName);
+      }));
+
+    streamZIPs.add(projectStream);
+    streamZIPs.add(eachEmailStream);
+
+    return streamZIPs;
+  };
+
+  const zipHelper = (srcPath, destPath, zipName) => {
     const imgPath = project.meta.hasOwnProperty('image_path')
       ? project.meta.image_path
       : null;
 
-    return gulpSrc([
-      `${buildDest}\*\*`,
-      `!${buildDest}/index.html`
-    ])
+    return gulpSrc(srcPath)
       .pipe(gulpif(!!imgPath, replace(/src\=\"images\//g, `src=\"${imgPath}`)))
       .pipe(gulpif(!!imgPath, replace(/src\=\"images\//g, `src=\'${imgPath}`)))
       .pipe(gulpif(!!imgPath, replace(/url\(images\//g, `url\(${imgPath}`)))
@@ -159,10 +178,9 @@ exports.build = (project) =>
       .pipe(gulpif(!!imgPath, replace(/background=\'images\//g, `background='${imgPath}`)))
       .pipe(gulpif(/index.html$/, removeFragments()))
       .pipe(gulpif(/index.html$/, fixDoctype()))
-      .pipe(zip(`${stamp}.zip`))
-      .pipe(dest(buildDest));
+      .pipe(zip(`${zipName}.zip`))
+      .pipe(dest(destPath));
   };
-
 
   // Remove fragments from emails
   const removeEmailFragments = () =>
@@ -201,6 +219,18 @@ exports.build = (project) =>
       .pipe(dest(buildDest));
   };
 
+  const createJSON = () =>
+  {
+    const stream = merge();
+    const meta = project.meta;
+
+    json = `{\n  "name": "${meta.name}",\n  "product": "${meta.product}",\n  "agency": "${meta.agency}",\n  "isVAE": ${meta.isVAE}\n}`;
+
+    fs.writeFile(`${buildDest}project.json`, json, () => stream.end());
+
+    return stream;
+  };
+
   return {
     clean,
     index,
@@ -210,5 +240,7 @@ exports.build = (project) =>
     removeEmailFragments,
     removeToken,
     vae,
+    zipHelper,
+    createJSON,
   };
 };

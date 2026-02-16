@@ -5,5 +5,9 @@
     "fragments": [
       "fragment-1"
     ]
+  },
+  "example-2": {
+    "subject": "",
+    "preHeader": ""
   }
 }

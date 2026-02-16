@@ -1,1 +1,1 @@
-const emails = [{"name":"examples","href":"examples/examples.html"}]
+const emails = [{"name":"examples","href":"examples/examples.html"},{"name":"example-2","href":"example-2/example-2.html"}]

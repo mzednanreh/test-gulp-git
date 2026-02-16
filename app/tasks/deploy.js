@@ -19,6 +19,7 @@ const replace = require('gulp-replace');
 const merge = require('merge-stream');
 const deployPather = require('../helpers/deploy-path.js');
 const { removeFragmentsToken } = require('../helpers/fragments');
+const git = require('gulp-git');
 
 /* FTP helpers */
 
@@ -31,7 +32,25 @@ const completeMessage = (creds, deployPath) =>
     gutil.colors.cyan(`Upload complete! View email(s) at`),
     gutil.colors.blue.bold(`${loc}`)
   );
+
+  updateStagingLog(loc);
 };
+
+// Update staging log file
+const updateStagingLog = (stagingLink) => {
+  const date = new Date();
+  const today = `${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getDate().toString().padStart(2, '0')}/${date.getFullYear()} - ${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}:${date.getSeconds().toString().padStart(2, '0')}`;
+
+  const stagingLogFile = `./staging-link.log`;
+
+  const newLogEntry = `${today} - staging link: ${stagingLink}\n`;
+
+  fs.appendFile(stagingLogFile, newLogEntry, (err) => {
+    if (err) throw err;
+    console.log('staging log file successfully updated!');
+  });
+};
+
 
 
 // Create a connection to server and overwrite
@@ -44,7 +63,7 @@ const connect = (creds, log, debug) =>
     password: creds.PASSWORD,
     log:      log,
     debug:    debug ? (text) => {debug.write(`${text}\n`);} : false,
-    secure:   true,
+    secure:   !true, /* make true before commit */
     secureOptions: { rejectUnauthorized: false }
   };
 
@@ -128,6 +147,22 @@ exports.deploy = (project) =>
             });
           }, 3000);
         });
+    },
+
+    // commit staging log file
+    commitStaginLog: () => {
+      const stagingLogFile = ['./staging-link.log'];
+
+      console.log('after deploy now commit log file');
+
+      return gulpSrc(stagingLogFile)
+        .pipe(git.add())
+        .pipe(git.commit('update staging-link log file'))
+        // .pipe(git.push('origin', function (err) {
+        //   if (err) throw err;
+        //   console.log('log file staging-link committed!');
+        // }))
+        ;
     },
   };
 };
