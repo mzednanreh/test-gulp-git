@@ -185,6 +185,7 @@ exports.build = (project) =>
   // Remove fragments from emails
   const removeEmailFragments = () =>
   {
+    
     return gulpSrc([
       `${buildDest}\*\*/index.html`,
       `!${buildDest}/index.html`
