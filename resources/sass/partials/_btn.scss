@@ -1,0 +1,24 @@
+a.btn {
+  display: inline-block;
+  vertical-align: middle;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 22px;
+  text-decoration: none;
+  text-align: center;
+  border-radius: 30px;
+  -webkit-text-size-adjust: none;
+  mso-hide: all;
+
+  @include mobile {
+    font-size: 13px !important;
+    line-height: 16px !important;
+  }
+
+  &.btn-primary {
+    color: #fff;
+    background-color: #007197;
+  }
+}

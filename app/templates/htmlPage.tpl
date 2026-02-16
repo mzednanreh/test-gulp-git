@@ -1,0 +1,7 @@
+{% set km = "<%fileName%>" %}
+
+{% extends "layout.html" %}
+
+{% block content %}
+  <!-- content goes here -->
+{% endblock %}

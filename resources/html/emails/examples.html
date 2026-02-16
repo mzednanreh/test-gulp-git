@@ -1,0 +1,150 @@
+{% set km = "examples" %}
+
+{% extends "layout.html" %}
+
+{% block content %}
+<container>
+  <row>
+    <columns class="px-0">
+
+    <!-- live-text-background-image -->
+    {% call bgImg("images/head_back.png", 600, 110) %}
+      {{ spacer(28) }}
+
+      <table>
+        <tr>
+          <td width="20"></td>
+          <td>
+            <table>
+              <tr>
+                <td class="line" width="5" style="width: 5px; height: 48px; background-color: #df5e2b;">&nbsp;</td>
+              </tr>
+            </table>
+          </td>
+          <td width="10"></td>
+          <td class="logo-title">
+            <b style="font-size: 26px;line-height: 25px;color:#fff">Text over images can work everywhere, except Veeva!</b>
+          </td>
+        </tr>
+      </table>
+    {% endcall %}
+    <!-- /live-text-background-image -->
+
+    {{ spacer(30) }}
+    {{ spacer(10, 0, "class-with-bg-color") }}
+    {{ spacer(30) }}
+
+    <!-- working-external-fonts-spaces-outlook-comments -->
+
+    <!-- Using external font -->
+      <!--
+      Font is imported in project.json file
+      Can be use inline or as a CSSS class
+      -->
+      <span style="font-family: Metal Mania, sans-serif;font-weight: 400;font-size: 30px;">This text should display with a metal font in Apple Mail on Mac &amp; iPhone!</span>
+    <!-- /Using external fotnt -->
+
+    {{ spacer(30) }}
+    {{ spacer(10, 0, "class-with-bg-color") }}
+    {{ spacer(30) }}
+
+    <!-- live-text-button -->
+
+    <!--
+      Other code for this is in:
+      - resources/sass/partials/_btn.scss
+    -->
+    <center>
+      {{ btn("Search safer", "https://duckduckgo.com/", 214, 42) }}
+    </center>
+
+    <!-- /live-text-button -->
+
+    {{ spacer(30) }}
+    {{ spacer(10, 0, "class-with-bg-color") }}
+    {{ spacer(30) }}
+
+
+    <!-- working-sups -->
+
+    <!--
+      Other code for this is in:
+      - resources/html/templates/layout.html in "if MSO" and "Android gmail targeting"
+      - resources/sass/partials/_sup.scss
+    -->
+
+    At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint Examplesal<sup>&reg;</sup> occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.
+
+    <!-- /working-sups -->
+
+    {{ spacer(30) }}
+    {{ spacer(10, 0, "class-with-bg-color") }}
+    {{ spacer(30) }}
+
+    <!-- email-with-fragments -->
+    {% raw %} {{insertEmailFragments[1,1]}} {% endraw %}
+    {% include "examples/fragment-1.html" ignore missing %}
+    <!-- /email-with-fragments -->
+
+    <!-- Using spaces -->
+
+    <!-- Global space (same vertical space for Desktop and Mobile) -->
+    {{ spacer(30) }}
+    <!-- /Global space (same vertical space for Desktop and Mobile) -->
+
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit deleniti aliquid dolorem, minus nemo at. Incidunt eius voluptas, in ab impedit temporibus vero itaque. Nihil quae labore laudantium in iusto.
+
+    <!-- Different vertical size for Desktop and Mobile -->
+    {{ spacer(30, 15) }}
+    <!-- /Different vertical size for Desktop and Mobile -->
+
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit deleniti aliquid dolorem, minus nemo at. Incidunt eius voluptas, in ab impedit temporibus vero itaque. Nihil quae labore laudantium in iusto.
+
+    <!-- Vertical space only in the Mobile version -->
+    {{ spacer(0, 50) }}
+    <!-- /Vertical space only in the Mobile version -->
+
+    <!-- Vertical space only in the Desktop version -->
+    {{ spacer(50, 0) }}
+    <!-- /Vertical space only in the Desktop version -->
+
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit deleniti aliquid dolorem, minus nemo at. Incidunt eius voluptas, in ab impedit temporibus vero itaque. Nihil quae labore laudantium in iusto.
+
+    {{ spacer(30, 15) }}
+
+    <!-- space used as line with background -->
+    {{ spacer(20, 0, "class-with-bg-color") }}
+    <!-- /space used as line with background -->
+
+    {{ spacer(30, 15) }}
+
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit deleniti aliquid dolorem, minus nemo at. Incidunt eius voluptas, in ab impedit temporibus vero itaque. Nihil quae labore laudantium in iusto.
+    <!-- Using spaces -->
+
+    <!-- Using HTML conditional comments for Outlook -->
+      <br><br>
+      Use HTML conditional comments without spaces <br>
+      Opening Comment <br>
+      like this <b>&lt;!--[if !mso]>&lt;\!--&gt;</b> <br>
+      NOT like this <b>&lt;!-- [if !mso]>&lt;\ !--&gt;</b> <br><br>
+      Closing Comment <br>
+      like this <b>&lt;!--&lt;![endif]--&gt;</b> <br>
+      NOT like this <b>&lt;!-- &lt;![endif] --&gt;</b> <br>
+
+      <!-- correct way below -->
+      <!--[if !mso]><\!-->
+      <p class="hide-lg">text mobile</p>
+      <!--<![endif]-->
+    <!-- /Using HTML conditional comments for Outlook -->
+
+    <!-- /working-external-fonts-spaces-outlook-comments -->
+
+
+    </columns>
+  </row>
+</container>
+
+
+
+
+{% endblock %}

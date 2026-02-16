@@ -1,0 +1,103 @@
+<!doctype html>
+<html>
+<head>
+  <title>Lutece Emails</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <style>
+    *, *:before, *:after {
+      -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
+      font-family: mono;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      padding: 2%;
+    }
+
+    a {
+      color: #333;
+    }
+
+    a:after {
+      content: ' ';
+      display: block;
+      position: absolute;
+      left: 0; right: 0;
+      top: 0; bottom: 0;
+    }
+
+    main {
+      height: 100%;
+      width: 100%;
+      margin: 0 auto;
+      font-weight: bold;
+    }
+
+    .link-container {
+      display: inline-block;
+      position: relative;
+      width: 100%;
+      height: 300px;
+      width: 250px;
+    }
+
+    iframe {
+      position: absolute;
+      left: 0px;
+      width: 800px;
+      height: 1000px;
+      transform: scale(0.25);
+      transform-origin: 0 0;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      html, body {
+        background: #193549;
+      }
+
+      a {
+        color: #ddd;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="links">
+    </section>
+  </main>
+</body>
+
+<script src="emails.json"></script>
+<script>
+  const container = document.querySelector('.links');
+
+  for (const email of emails) {
+    const linkWrap = document.createElement('div');
+    const title = document.createElement('div');
+    const iframe = document.createElement('iframe');
+    const link = document.createElement('a');
+
+    linkWrap.classList.add('link-container');
+
+    title.classList.add('title');
+    title.textContent = email['name'];
+
+    iframe.src = email['href'];
+
+    link.href = email['href'];
+    link.classList.add('link');
+
+    link.appendChild(title);
+    link.appendChild(iframe);
+    linkWrap.appendChild(link);
+    container.appendChild(linkWrap);
+  }
+</script>
+</html>

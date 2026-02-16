@@ -1,0 +1,80 @@
+{% macro img(path, width, alt = "Image") %}
+  <img
+    src="{{ path }}"
+    width="{{ width }}"
+    style="width: {{ width }}px; max-width: {{ width }}px"
+    alt="{{ alt}}"
+  >
+{% endmacro %}
+
+{% macro fullWidthImg(path, width, alt = "Image") %}
+  <img
+    src="{{ path }}"
+    width="{{ width }}"
+    style="width: 100%"
+    alt="{{ alt}}"
+  >
+{% endmacro %}
+
+{% macro responsiveImg(desktopPath, mobilePath, desktopWidth, mobileWidth, alt = "Image") %}
+  <img
+    class="hide-sm"
+    src="{{ desktopPath }}"
+    width="{{ desktopWidth }}"
+    style="width: {{ desktopWidth }}px; max-width: {{ desktopWidth }}px"
+    alt="{{ alt }}"
+  >
+  <!--[if !mso]><\!-->
+  <img
+    class="hide-lg"
+    src="{{ mobilePath }}"
+    width="{{ mobileWidth }}"
+    style="width: {{ mobileWidth }}px; max-width: {{ mobileWidth }}px"
+    alt="{{ alt }}"
+  >
+  <!--<![endif]-->
+{% endmacro %}
+
+{% macro responsiveFullWidthImg(desktopPath, mobilePath, desktopWidth, alt = "Image") %}
+  <img
+    class="hide-sm"
+    src="{{ desktopPath }}"
+    width="{{ desktopWidth }}"
+    style="width: 100%"
+    alt="{{ alt }}"
+  >
+  <!--[if !mso]><\!-->
+  <img
+    class="hide-lg"
+    src="{{ mobilePath }}"
+    style="width: 100%"
+    alt="{{ alt }}"
+  >
+  <!--<![endif]-->
+{% endmacro %}
+
+{% macro bgImg(path, width, height, classes) %}
+<table class="bg-img {{ classes }}" style="height: {{ height }}px; background-image: url({{ path }})">
+  <tr>
+    <td>
+      <!--[if mso]>
+      <v:rect
+        xmlns:v="urn:schemas-microsoft-com:vml"
+        fill="true"
+        stroke="false"
+        style="width: {{ width }}px; height: {{ height }}px;"
+      >
+        <v:fill type="frame" src="{{ path }}" color="none" />
+        <v:textbox inset="0,0,0,0">
+      <![endif]-->
+
+      {{ caller() }}
+
+      <!--[if mso]>
+        </v:textbox>
+      </v:rect>
+      <![endif]-->
+    </td>
+  </tr>
+</table>
+{% endmacro %}

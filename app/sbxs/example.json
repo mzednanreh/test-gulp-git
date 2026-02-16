@@ -1,0 +1,11 @@
+{
+  "USER": "jsmith",
+  "PASSWORD": "hunter2",
+  "HOST": "oc.envivent.com",
+  "dir": "/wwwstage/sandbox.envivent.com/lemails/",
+  "loc": "http://sandbox.envivent.com/lemails",
+  "settings":
+  {
+    "parallel": 4
+  }
+}

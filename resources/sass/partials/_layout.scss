@@ -1,0 +1,120 @@
+body,
+html,
+.body {
+  background: #f3f3f3 !important;
+}
+
+.body th,
+.body td:not([height]):not(.center) {
+  overflow-wrap: normal !important;
+  word-wrap: normal !important;
+  word-break: keep-all !important;
+  hyphens: none !important;
+  -webkit-hyphens: none !important;
+  mso-hyphenate: none;
+}
+
+table.container {
+
+  th.columns {
+    padding-bottom: 0;
+
+    @include mobile {
+      padding-right: $global-gutter-mobile !important;
+      padding-left: $global-gutter-mobile !important;
+    }
+  }
+
+  th {
+
+    &.p-0 {
+      padding-bottom: 0;
+      padding-left: 0;
+      padding-right: 0;
+      padding-top: 0;
+    }
+
+    &.pr-0 {
+      padding-right: 0;
+    }
+
+    &.pl-0 {
+      padding-left: 0;
+    }
+
+    &.px-0 {
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    @include mobile {
+
+      &.p-0 {
+        padding-bottom: 0 !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        padding-top: 0 !important;
+      }
+
+      &.pr-0 {
+        padding-right: 0 !important;
+      }
+
+      &.pl-0 {
+        padding-left: 0 !important;
+      }
+
+      &.px-0 {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+      }
+    }
+  }
+}
+
+td.large-6 center,
+th.large-6 center,
+td.large-12 center,
+th.large-12 center {
+  min-width: 1px;
+}
+
+select {
+  max-width: 500px;
+}
+
+.hide-lg {
+  display: none;
+  font-size: 0;
+  max-height: 0;
+  line-height: 0;
+  mso-hide: all;
+}
+
+@include mobile {
+  .hide-sm {
+    display: none !important;
+    font-size: 0 !important;
+    max-height: 0 !important;
+    line-height: 0 !important;
+    mso-hide: all !important;
+  }
+
+  .hide-lg {
+    display: table !important;
+    max-height: none !important;
+    line-height: 1 !important;
+    font-size: 16px !important;
+  }
+}
+
+.inline-block {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.bg-img {
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size: contain;
+}

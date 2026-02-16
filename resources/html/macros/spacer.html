@@ -1,0 +1,44 @@
+{% macro spacer(desktopSize, mobileSize, classes) %}
+
+  {% if not classes %}
+
+    {% if desktopSize and not mobileSize and mobileSize != 0 %}
+
+      <p class="spacer" style="font-size: {{ desktopSize }}px; line-height: {{ desktopSize }}px;">&nbsp;</p>
+
+    {% elif desktopSize and mobileSize %}
+
+      <p class="spacer hide-sm" style="font-size: {{ desktopSize }}px; line-height: {{ desktopSize }}px;">&nbsp;</p>
+
+      <!--[if !mso]><\!-->
+      <spacer class="hide-lg" size="{{ mobileSize }}"></spacer>
+      <!--<![endif]-->
+
+    {% elif desktopSize and mobileSize == 0 %}
+
+      <p class="spacer hide-sm" style="font-size: {{ desktopSize }}px; line-height: {{ desktopSize }}px;">&nbsp;</p>
+
+    {% elif not desktopSize and mobileSize %}
+
+      <!--[if !mso]><\!-->
+      <spacer class="hide-lg" size="{{ mobileSize }}"></spacer>
+      <!--<![endif]-->
+
+    {% endif %}
+
+  {% else %}
+
+    <p class="spacer {{ classes }}" style="font-size: {{ desktopSize }}px; line-height: {{ desktopSize }}px;">&nbsp;</p>
+
+  {% endif %}
+
+{% endmacro %}
+
+<!--
+USE CASES:
+1. {{ spacer(20) }} - 20px on desktop and mobile
+2. {{ spacer(20, 10) }} - 20px on desktop, 10px on mobile
+3. {{ spacer(20, 0) }} - 20px on desktop
+4. {{ spacer(0, 20) }} - 20px on mobile
+5. {{ spacer(20, 0, 'bg-class') }} - 20px color line on desktop and mobile
+-->

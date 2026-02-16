@@ -1,0 +1,31 @@
+# standard ignores
+node_modules
+.sass-cache
+.bowerrc
+base.sublime-project
+.DS_STORE
+**/.DS_STORE
+npm-shrinkwrap.json
+
+# ignore vscode in this repo until non-build tasks format decided upon
+.vscode
+
+# contain SBX credentials
+app/sbxs/*
+src/_deploy/ctlfile/*.ctl
+!app/sbxs/example.json
+
+# gulp generated CSS/JS files
+src/*/css/local.css
+src/*/js/local.js
+src/*/*.html
+src/shared/*/css/main.css
+src/shared/*/js/bundled.js
+src/shared/css/main.css
+
+# ignore all built files except ZIP hand off
+src/_build
+src/_build/*.zip
+
+# jetbrains folder
+.idea

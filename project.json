@@ -1,0 +1,14 @@
+{
+  "name": "live-text-background-image",
+  "product": "xyz",
+  "isVAE": true,
+  "//comment1": "this isVAE control which NPM package is used to generate the build false: normal and true: reduced one",
+  "fonts": [
+    {
+      "used": true,
+      "font": "Metal Mania",
+      "settings":  ""
+    }
+   ],
+   "image_path": ""
+}

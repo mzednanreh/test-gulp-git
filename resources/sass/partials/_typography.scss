@@ -1,0 +1,80 @@
+sup,
+sub {
+  font-size: 60%;
+  line-height: 0;
+}
+
+b,
+.fw-700,
+p.fw-700 {
+  font-weight: 700;
+}
+
+.nowrap {
+  white-space: nowrap;
+}
+
+.underline,
+a.underline {
+  text-decoration: underline;
+}
+
+table.list {
+
+  tr {
+
+    &:last-child {
+
+      th {
+        padding-bottom: 0;
+      }
+    }
+  }
+
+  th {
+    padding-bottom: 10px;
+
+    &:first-child {
+      padding-right: 12px;
+      padding-left: 12px;
+    }
+  }
+}
+
+table.footnotes {
+
+  .footnotes-content {
+
+    tr {
+
+      &:last-child {
+
+        th {
+          padding-bottom: 0;
+        }
+      }
+    }
+  }
+
+  th {
+    padding-bottom: 3px;
+    font-size: 10px;
+    line-height: 13px;
+
+    &.columns {
+
+      @include mobile {
+      }
+    }
+
+    &:first-child {
+      width: 4px;
+      text-align: right;
+
+      sup {
+        vertical-align: 4px;
+        line-height: 9px;
+      }
+    }
+  }
+}
