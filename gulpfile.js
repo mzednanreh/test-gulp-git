@@ -42,7 +42,7 @@ exports.inline = series(html, inline);
 exports['inline:sass'] = series(styles, html, inline);
 exports.build = series(zips, build.removeEmailFragments);
 exports['build:vae'] = series(buildAll, build.removeToken, build.vae);
-exports.deploy = series(zips, deploy.replace, deploy.sbx, deploy.commitStaginLog);
+exports.deploy = series(zips, deploy.replace, deploy.sbx);
 exports.zips = zips;
 exports.clean = build.clean;
 

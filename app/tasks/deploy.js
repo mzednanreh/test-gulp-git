@@ -48,9 +48,25 @@ const updateStagingLog = (stagingLink) => {
   fs.appendFile(stagingLogFile, newLogEntry, (err) => {
     if (err) throw err;
     console.log('staging log file successfully updated!');
+    commitStaginLog();
   });
 };
 
+
+const commitStaginLog = () => {
+  const stagingLogFile = ['./staging-link.log'];
+
+  console.log('after deploy now commit log file');
+
+  return gulpSrc(stagingLogFile)
+    .pipe(git.add())
+    .pipe(git.commit('update staging-link log file'))
+    // .pipe(git.push('origin', function (err) {
+    //   if (err) throw err;
+    //   console.log('log file staging-link committed!');
+    // }))
+    ;
+};
 
 
 // Create a connection to server and overwrite
@@ -144,25 +160,26 @@ exports.deploy = (project) =>
           setTimeout(() => {
             deploy().on('end', () => {
               completeMessage(creds, deployPath);
+              // commitStaginLog();
             });
           }, 3000);
         });
     },
 
     // commit staging log file
-    commitStaginLog: () => {
-      const stagingLogFile = ['./staging-link.log'];
+    // commitStaginLog: () => {
+    //   const stagingLogFile = ['./staging-link.log'];
 
-      console.log('after deploy now commit log file');
+    //   console.log('after deploy now commit log file');
 
-      return gulpSrc(stagingLogFile)
-        .pipe(git.add())
-        .pipe(git.commit('update staging-link log file'))
-        // .pipe(git.push('origin', function (err) {
-        //   if (err) throw err;
-        //   console.log('log file staging-link committed!');
-        // }))
-        ;
-    },
+    //   return gulpSrc(stagingLogFile)
+    //     .pipe(git.add())
+    //     // .pipe(git.commit('update staging-link log file'))
+    //     // .pipe(git.push('origin', function (err) {
+    //     //   if (err) throw err;
+    //     //   console.log('log file staging-link committed!');
+    //     // }))
+    //     ;
+    // },
   };
 };
